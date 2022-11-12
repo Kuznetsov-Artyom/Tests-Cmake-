@@ -46,30 +46,6 @@ namespace vectors
 
 
 
-/*
-void addFile(string path, const matrix& matr)
-{
-	try
-	{
-		ofstream fin;
-
-		fin.open(path, fstream::in | fstream::out | fstream::app);
-
-		if (fin.is_open())
-		{
-			fin << matr;
-		}
-
-		fin.close();
-	}
-	catch (const exception& ex)
-	{
-		cout << "Ошибка чтения файла!" << endl;
-		cout << ex.what() << endl;
-	}
-}
-*/
-
 
     // Тестирование (сравнение стандартной и параллельной версий)
     void testSumVectors(uint32_t low, uint32_t up, uint16_t stepMul)
@@ -130,9 +106,13 @@ void addFile(string path, const matrix& matr)
             (resPar > resNoPar) ? "no par" : "par = no par") << "\n\n";
         }
 
+        // Закрываем файл после записи результатов
+         fout.close();
+
         // Парсинг в exel
 
-        fout.close();
+        // Удаление временных файлов
+
     }
 
 } // namespace vectors

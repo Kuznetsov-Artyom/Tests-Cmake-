@@ -127,9 +127,13 @@ namespace matrixs
             (resPar > resNoPar) ? "no par" : "par = no par") << "\n\n";
         }
 
+        // Закрываем файл после записи результатов
+        fout.close();     
+
         // Парсинг в exel
 
-        fout.close();        
+        // Удаление временных файлов
+
     }
     
 } // namespace matrixs
