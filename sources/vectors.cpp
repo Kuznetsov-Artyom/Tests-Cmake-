@@ -46,14 +46,48 @@ namespace vectors
 
 
 
+/*
+void addFile(string path, const matrix& matr)
+{
+	try
+	{
+		ofstream fin;
+
+		fin.open(path, fstream::in | fstream::out | fstream::app);
+
+		if (fin.is_open())
+		{
+			fin << matr;
+		}
+
+		fin.close();
+	}
+	catch (const exception& ex)
+	{
+		cout << "Ошибка чтения файла!" << endl;
+		cout << ex.what() << endl;
+	}
+}
+*/
+
 
     // Тестирование (сравнение стандартной и параллельной версий)
     void testSumVectors(uint32_t low, uint32_t up, uint16_t stepMul)
     {
+        // Создаем временный .txt файл, для сохранения результатов
+        std::string path = "../../resultVectors.txt";
+        std::ofstream fout;
+
+        fout.open(path, std::fstream::out | std::fstream::app);
+        
+        
         for (uint32_t sizeVec = low; sizeVec <= up; sizeVec *= stepMul)
         {
             // Размерность векторов на текущей итерации
             cout << "dimension of the vector: " << sizeVec << '\n';
+
+            // Записываем размерность векторов в .txt для тестов
+            fout << sizeVec << ' ';
 
             vector<int> vecOne(sizeVec);
             vector<int> vecTwo(sizeVec);
@@ -82,17 +116,23 @@ namespace vectors
             // Тест версии без параллелизма
             resNoPar = sumVectors(vecOne, vecTwo);
             cout << "timer no parallel: " << resNoPar << " sec." << '\n';
+            fout << resNoPar << ' ';
 
 
             // Тест версии с парарллелизмом
             resPar = sumVectorsParallel(vecOne, vecTwo);
             cout << "timer parallel: " << resPar << " sec." << '\n';
+            fout << resPar << '\n';
 
 
             // Определение победителя
             cout << "winner: " << ((resPar < resNoPar) ? "parallel" :
             (resPar > resNoPar) ? "no par" : "par = no par") << "\n\n";
         }
+
+        // Парсинг в exel
+
+        fout.close();
     }
 
 } // namespace vectors

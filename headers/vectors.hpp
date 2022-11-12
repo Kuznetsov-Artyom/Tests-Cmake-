@@ -7,6 +7,7 @@
 #include <omp.h>
 #include <random>
 #include <limits>
+#include <fstream>
 
 
 namespace vectors

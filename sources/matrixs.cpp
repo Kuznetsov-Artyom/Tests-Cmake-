@@ -68,10 +68,20 @@ namespace matrixs
     // Тестирование (сравнение стандартной и параллельной версий)
     void testMultMatrixs(uint32_t low, uint32_t up, uint16_t step)
     {
+        // Создаем временный .txt файл, для сохранения результатов
+        std::string path = "../../resultMatrixs.txt";
+        std::ofstream fout;
+
+        fout.open(path, std::fstream::out | std::fstream::app);
+
+
         for (uint32_t sizeMatr = low; sizeMatr <= up; sizeMatr += step)
         {
             // Размерность матриц на текущей итерации
             cout << "dimension of the matrix: " << sizeMatr << '\n';
+
+             // Записываем размерность матриц в .txt для тестов
+            fout << sizeMatr << ' ';
 
             Matrix matrOne(sizeMatr, sizeMatr);
             Matrix matrTwo(sizeMatr, sizeMatr);
@@ -103,17 +113,23 @@ namespace matrixs
             // Тест версии без параллелизма
             resNoPar = multMatrixs(matrOne, matrTwo);
             cout << "timer no parallel: " << resNoPar << " sec." << '\n';
+            fout << resNoPar << ' ';
 
 
             // Тест версии с парарллелизмом
             resPar = multMatrixsParallel(matrOne, matrTwo);
             cout << "timer parallel: " << resPar << " sec." << '\n';
+            fout << resPar << '\n';
 
 
             // Определение победителя
             cout << "winner: " << ((resPar < resNoPar) ? "parallel" :
             (resPar > resNoPar) ? "no par" : "par = no par") << "\n\n";
         }
+
+        // Парсинг в exel
+
+        fout.close();        
     }
     
 } // namespace matrixs

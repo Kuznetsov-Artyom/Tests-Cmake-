@@ -8,6 +8,7 @@
 #include <random>
 #include <limits>
 #include "matrix.hpp"
+#include <fstream>
 
 
 namespace matrixs
