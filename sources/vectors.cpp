@@ -51,7 +51,7 @@ namespace vectors
     void testSumVectors(uint32_t low, uint32_t up, uint16_t stepMul)
     {
         // Создаем временный .txt файл, для сохранения результатов
-        std::string path = "../../resultVectors.txt";
+        std::string path = "..\\..\\resultVectors.txt";
         std::ofstream fout;
 
         fout.open(path, std::fstream::out | std::fstream::app);
@@ -107,12 +107,14 @@ namespace vectors
         }
 
         // Закрываем файл после записи результатов
-         fout.close();
+        fout.close();
 
         // Парсинг в exel
 
+        //system("pause");
         // Удаление временных файлов
+        system(("del " + path).c_str());
 
     }
 
-} // namespace vectors
+} // namespace vectorscd

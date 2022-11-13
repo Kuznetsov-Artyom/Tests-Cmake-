@@ -69,7 +69,7 @@ namespace matrixs
     void testMultMatrixs(uint32_t low, uint32_t up, uint16_t step)
     {
         // Создаем временный .txt файл, для сохранения результатов
-        std::string path = "../../resultMatrixs.txt";
+        std::string path = "..\\..\\resultMatrixs.txt";
         std::ofstream fout;
 
         fout.open(path, std::fstream::out | std::fstream::app);
@@ -132,7 +132,9 @@ namespace matrixs
 
         // Парсинг в exel
 
+        //system("pause");
         // Удаление временных файлов
+        system(("del " + path).c_str());
 
     }
     
